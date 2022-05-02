@@ -1,3 +1,0 @@
-# Tabby
-
-Documentation for Tabby
