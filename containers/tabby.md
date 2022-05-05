@@ -2,7 +2,7 @@
 title: Tabby
 description: Guide to Tabby in Docker
 published: true
-date: 2022-05-05T06:59:12.947Z
+date: 2022-05-05T07:01:33.076Z
 tags: containers
 editor: markdown
 dateCreated: 2022-05-05T06:05:38.239Z
@@ -65,19 +65,17 @@ Create a file named `docker-compose.yml` and then run `docker-compose pull && do
 ```bash
 version: '3'
 services:
+
   tabby:
     image: thealpaka/tabby
     container_name: tabby
-    networks:
-      - backend
     ports:
       - 8090:80
     restart: unless-stopped
+    
   db:
     image: linuxserver/mariadb
     container_name: tabby-db
-    networks:
-      - backend
     environment:
       - PUID=1000 # Run 'id' in your terminal to get this value
       - PGID=1000 # Run 'id' in your terminal to get this value
@@ -89,7 +87,4 @@ services:
     volumes:
       - ./db:/config
     restart: unless-stopped
-networks:
-  backend:
-    internal: true
 ```
