@@ -2,14 +2,17 @@
 title: Tabby
 description: Guide to Tabby in Docker
 published: true
-date: 2022-05-05T06:56:56.719Z
+date: 2022-05-05T06:59:12.947Z
 tags: containers
 editor: markdown
 dateCreated: 2022-05-05T06:05:38.239Z
 ---
 
 # Requirements
-Your content here
+- Docker
+- An internet connection
+- Optional:
+	- Docker Compose
 
 # Quick Start
 This is the bare minimum you need to get the container up and running
