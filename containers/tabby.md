@@ -2,7 +2,7 @@
 title: Tabby
 description: Guide to Tabby in Docker
 published: true
-date: 2022-05-20T00:51:13.137Z
+date: 2022-05-20T15:35:00.175Z
 tags: containers
 editor: markdown
 dateCreated: 2022-05-05T06:05:38.239Z
@@ -99,5 +99,7 @@ services:
 # Build
 This section covers building the container.
 
+```bash 
 git clone https://github.com/parksauce/tabby.git
 cd tabby && docker build -t tabby .
+```
