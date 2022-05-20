@@ -2,11 +2,18 @@
 title: Tabby
 description: Guide to Tabby in Docker
 published: true
-date: 2022-05-05T07:01:33.076Z
+date: 2022-05-20T00:35:19.972Z
 tags: containers
 editor: markdown
 dateCreated: 2022-05-05T06:05:38.239Z
 ---
+
+# Goals
+- Rebase the image from ubuntu to alpine to support more architectures
+- Switch to NGINX as the webserver
+
+# Known Issues
+- Emails not sending
 
 # Requirements
 - Docker
@@ -15,16 +22,16 @@ dateCreated: 2022-05-05T06:05:38.239Z
 	- Docker Compose
 
 # Quick Start
-This is the bare minimum you need to get the container up and running
+This is the bare minimum you need to get the container up and running. Note: this method still needs a database to function properly.
 ```bash
 docker run -d \
 --name=tabby \
 --network=tabby-backend \
--p 8090:80 \
+-p 8010:80 \
 --restart unless-stopped \
 thealpaka/tabby
 ```
-Now you can access the container from `http://HOST_IP:8090`
+Now you can access the container from `http://HOST_IP:8010`
 
 # Advanced Configuration
 This section covers a more in-depth guide on deploying Tabby on your server.
@@ -39,7 +46,7 @@ Run the following command to start Tabby
 docker run -d \
 --name=tabby \
 --network=tabby-backend \
--p 8090:80 \
+-p 8010:80 \
 --restart unless-stopped \
 thealpaka/tabby
 ```
@@ -55,7 +62,6 @@ docker run -d \
   -e MYSQL_DATABASE=tabby \
   -e MYSQL_USER=tabby \
   -e MYSQL_PASSWORD=tabby \
-  -p 3306:3306 \
   -v path_to_data:/config \
   --restart unless-stopped \
   linuxserver/mariadb
@@ -70,7 +76,7 @@ services:
     image: thealpaka/tabby
     container_name: tabby
     ports:
-      - 8090:80
+      - 8010:80
     restart: unless-stopped
     
   db:
