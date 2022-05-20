@@ -2,7 +2,7 @@
 title: Tabby
 description: Guide to Tabby in Docker
 published: true
-date: 2022-05-20T00:35:19.972Z
+date: 2022-05-20T00:42:29.059Z
 tags: containers
 editor: markdown
 dateCreated: 2022-05-05T06:05:38.239Z
@@ -11,7 +11,7 @@ dateCreated: 2022-05-05T06:05:38.239Z
 # Goals
 - Rebase the image from ubuntu to alpine to support more architectures
 - Switch to NGINX as the webserver
-
+- Add PUID and PGID environment variables
 # Known Issues
 - Emails not sending
 
