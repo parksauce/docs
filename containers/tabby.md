@@ -2,7 +2,7 @@
 title: Tabby
 description: Guide to Tabby in Docker
 published: true
-date: 2022-05-21T06:04:33.680Z
+date: 2022-05-21T06:19:00.384Z
 tags: containers
 editor: markdown
 dateCreated: 2022-05-05T06:05:38.239Z
@@ -26,11 +26,11 @@ dateCreated: 2022-05-05T06:05:38.239Z
 This is the bare minimum you need to get the container up and running. Note: this method still needs a database to function properly.
 ```bash
 docker run -d \
---name=tabby \
---network=tabby-backend \
--p 8010:80 \
---restart unless-stopped \
-thealpaka/tabby
+  --name=tabby \
+  --network=tabby-backend \
+  -p 8010:80 \
+  --restart unless-stopped \
+  thealpaka/tabby
 ```
 Now you can access the container from `http://HOST_IP:8010`
 
@@ -45,11 +45,11 @@ docker network create tabby-backend
 Run the following command to start Tabby
 ```bash
 docker run -d \
---name=tabby \
---network=tabby-backend \
--p 8010:80 \
---restart unless-stopped \
-thealpaka/tabby
+  --name=tabby \
+  --network=tabby-backend \
+  -p 8010:80 \
+  --restart unless-stopped \
+  thealpaka/tabby
 ```
 Then run this command to start the database
 ```bash
