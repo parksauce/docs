@@ -2,7 +2,7 @@
 title: Tabby
 description: Guide to Tabby in Docker
 published: true
-date: 2022-05-21T03:49:05.441Z
+date: 2022-05-21T05:58:59.541Z
 tags: containers
 editor: markdown
 dateCreated: 2022-05-05T06:05:38.239Z
@@ -56,8 +56,8 @@ Then run this command to start the database
 docker run -d \
   --name=mariadb \
   --network=tabby-backend \
-  -e PUID=1000 # Run 'id' in your terminal to get this value \
-  -e PGID=1000 # Run 'id' in your terminal to get this value \
+  -e PUID=1000 \ # Run 'id' in your terminal to get this value
+  -e PGID=1000 \ # Run 'id' in your terminal to get this value
   -e MYSQL_ROOT_PASSWORD=ROOT_ACCESS_PASSWORD \
   -e TZ=America/New_York \
   -e MYSQL_DATABASE=tabby \
