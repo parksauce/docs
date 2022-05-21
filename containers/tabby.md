@@ -2,7 +2,7 @@
 title: Tabby
 description: Guide to Tabby in Docker
 published: true
-date: 2022-05-21T05:58:59.541Z
+date: 2022-05-21T06:04:33.680Z
 tags: containers
 editor: markdown
 dateCreated: 2022-05-05T06:05:38.239Z
@@ -94,6 +94,20 @@ services:
     volumes:
       - ./db:/config
     restart: unless-stopped
+    
+  #db:
+  #  image: postgres
+  #  container_name: tabby-db
+  #  networks:
+  #    - backend
+  #  environment:
+  #    - POSTGRES_DB=tabby
+  #    - POSTGRES_USER=tabby
+  #    - POSTGRES_PASSWORD=tabby
+  #  volumes:
+  #    - ./db:/var/lib/postgresql/data
+  #  restart: unless-stopped
+
 ```
 
 # Build
