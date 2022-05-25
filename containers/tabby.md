@@ -2,7 +2,7 @@
 title: Tabby
 description: Guide to Tabby in Docker
 published: true
-date: 2022-05-21T06:19:00.384Z
+date: 2022-05-25T18:18:31.510Z
 tags: containers
 editor: markdown
 dateCreated: 2022-05-05T06:05:38.239Z
@@ -23,7 +23,7 @@ dateCreated: 2022-05-05T06:05:38.239Z
 	- Docker Compose
 
 # Quick Start
-This is the bare minimum you need to get the container up and running. Note: this method still needs a database to function properly.
+This is the fastest way to get the service up and running, I would recommend not using this method and instead use the [compose file](#docker-compose)
 ```bash
 docker run -d \
   --name=tabby \
