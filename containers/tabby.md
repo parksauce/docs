@@ -2,7 +2,7 @@
 title: Tabby
 description: Guide to Tabby in Docker
 published: true
-date: 2022-05-25T19:08:25.291Z
+date: 2022-05-25T19:11:08.615Z
 tags: containers
 editor: markdown
 dateCreated: 2022-05-05T06:05:38.239Z
@@ -21,6 +21,9 @@ dateCreated: 2022-05-05T06:05:38.239Z
 - An internet connection
 - Optional:
 	- Docker Compose
+
+# Credits
+All credits to Tabby goes to the devs at [https://github.com/bertvandepoel/tabby](https://github.com/bertvandepoel/tabby). 
 
 # Quick Start
 This is the fastest way to get the service up and running, it will take you through a semi interactive startup to initialize the environment with a database. It will also give you some steps to connect tabby to the database. Use the code below to deploy tabby on your system, for production envrionments I recommend using [docker compose](#docker-compose).
@@ -149,3 +152,6 @@ The table below shows the different arguments we support
 |:---------:|:---------:|
 | TABBY_VERSION | Changes the version of Tabby |
 | PHP_VERSION|Change the version of PHP|
+
+## License
+This project is licensed under the AGPL license - see the [LICENSE](https://github.com/parksauce/tabby/blob/main/LICENSE) file for details.
