@@ -2,7 +2,7 @@
 title: Tabby
 description: Guide to Tabby in Docker
 published: true
-date: 2022-05-25T18:18:31.510Z
+date: 2022-05-25T19:08:25.291Z
 tags: containers
 editor: markdown
 dateCreated: 2022-05-05T06:05:38.239Z
@@ -23,14 +23,13 @@ dateCreated: 2022-05-05T06:05:38.239Z
 	- Docker Compose
 
 # Quick Start
-This is the fastest way to get the service up and running, I would recommend not using this method and instead use the [compose file](#docker-compose)
+This is the fastest way to get the service up and running, it will take you through a semi interactive startup to initialize the environment with a database. It will also give you some steps to connect tabby to the database. Use the code below to deploy tabby on your system, for production envrionments I recommend using [docker compose](#docker-compose).
 ```bash
-docker run -d \
-  --name=tabby \
-  --network=tabby-backend \
-  -p 8010:80 \
-  --restart unless-stopped \
-  thealpaka/tabby
+# Copy the startup script to your computer
+wget https://raw.githubusercontent.com/parksauce/tabby/main/startup.sh
+
+# Run the script and follow the prompts
+./startup.sh
 ```
 Now you can access the container from `http://HOST_IP:8010`
 
@@ -67,6 +66,9 @@ docker run -d \
   --restart unless-stopped \
   linuxserver/mariadb
 ```
+
+<br/>
+
 ## Docker Compose
 Create a file named `docker-compose.yml` and then run `docker-compose pull && docker-compose up -d`
 ```bash
@@ -113,7 +115,37 @@ services:
 # Build
 This section covers building the container.
 
+<br/>
+
+## Basic Build
+This will clone the repo to your environment, then it will move to the `tabby` directory and build the container and name it tabby. By default the container uses Tabby version 1.2.2 which may become out of date at some point. Look into the [Advanced Build](#advanced-build) to change the version of Tabby while building the container.
 ```bash
 git clone https://github.com/parksauce/tabby.git
 cd tabby && docker build -t tabby .
 ```
+
+<br/>
+
+## Advanced Build
+When building the container you are capable of using a few different build parameters to change the version of both Tabby and PHP in the container. You can use the below command as a template for whatever builds you want.
+
+<br/>
+
+### Clone Repo
+First clone the repo and move to the `tabby` directory
+
+```bash
+git clone https://github.com/parksauce/tabby.git && cd tabby 
+```
+
+### Building the Container
+We support a few different build arguments when building the container. Check [build arguments](#build-arguments) for more information. Below is an example to build the container for Tabby version 1.2.2 using the latest version of PHP.
+```bash
+docker build --build-arg TABBY_VERSION=1.2.2 -t tabby .
+```
+#### Build Arguments
+The table below shows the different arguments we support
+|  Argument | Function  |
+|:---------:|:---------:|
+| TABBY_VERSION | Changes the version of Tabby |
+| PHP_VERSION|Change the version of PHP|
