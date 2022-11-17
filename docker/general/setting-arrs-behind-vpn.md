@@ -2,7 +2,7 @@
 title: Setting the *arrs behind a VPN
 description: This guide will cover setting up Sonarr, Radarr, and various others behind a VPN
 published: false
-date: 2022-11-17T00:45:28.519Z
+date: 2022-11-17T02:13:17.807Z
 tags: docker, general
 editor: markdown
 dateCreated: 2022-06-05T00:42:25.363Z
