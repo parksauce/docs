@@ -2,7 +2,7 @@
 title: Home
 description: 
 published: true
-date: 2022-11-18T01:56:39.323Z
+date: 2022-11-18T01:56:48.830Z
 tags: 
 editor: markdown
 dateCreated: 2022-06-02T12:50:21.083Z
@@ -12,4 +12,4 @@ dateCreated: 2022-06-02T12:50:21.083Z
 
 <center><b>Use the sidebar to navigate the site</b></center>
 
-<center><img src=hhttps://parksauce.io/wp-content/uploads/2022/05/parksauce_logo-1920px.png></center>
+<center><img src=https://parksauce.io/wp-content/uploads/2022/05/parksauce_logo-1920px.png></center>
