@@ -2,7 +2,7 @@
 title: Setting the *arrs behind a VPN
 description: This guide will cover setting up Sonarr, Radarr, and various others behind a VPN
 published: false
-date: 2022-11-17T02:13:17.807Z
+date: 2022-11-18T02:14:39.910Z
 tags: docker, general
 editor: markdown
 dateCreated: 2022-06-05T00:42:25.363Z
@@ -240,16 +240,16 @@ This last section contains the volume for the container. This is where the confi
     restart: unless-stopped
 ```
 ### Deluge
-The next container in the stack is deluge. This handles the downloading of torrents. Optionally you can replace deluge with any other torrent client your prefer.
+The next container in the stack is deluge. This handles the downloading of torrents. Optionally you can replace deluge with any other torrent client you prefer.
 
-This part of the file specifies the image user and the name for the container
+This part of the file specifies the image used and the name for the container
 ```yaml
     image: linuxserver/deluge:latest
     container_name: deluge
     depends_on:
       - gluetun
 ```
-Next we specify the environment variables for the container. These variables are pulled from the `.env` file. The PUID and GUID are used to set permissions. These should be set to your user which is typically `1000` for both but run `id` in your terminal to verify those values. Note if your using a user other than the default one created on most linux systems then these will be different. Lastly we set the deluge log level to error for debugging you may want to change that.  
+Next we specify the environment variables for the container. These variables are pulled from the `.env` file. The PUID and GUID are used to set permissions. These should be set to your user which is typically `1000` for both but run `id` in your terminal to verify those values. Note if your using a user other than the default one created on most linux systems then these will be different. Lastly we set the deluge log level to error, for debugging you may want to change that.  
 ```yaml
     environment:
       - PUID=${PUID}
@@ -357,7 +357,7 @@ The final step is to configure all of the services to communicate with each othe
 Now that our containers are running we should be able to access them using the server ip and the port number. You'll need to open up a web brower and type in `http://<ServerIP>:<PORT#>`
 
 ## Deluge
-First lets go to deluge and get it setup and prepared for sonarr and radarr. To access deluge you'll have to first find your servers IP address. You can find it with `ip a`, once you have that you'll want to go to your browser and type in `http://<ServerIP>:8112`. The default password is `deluge`
+First lets go to deluge and get it setup and prepared for sonarr and radarr. To access deluge you'll have to first find your servers IP address. You can find it with `ifconfig`, once you have that you'll want to go to your browser and type in `http://<ServerIP>:8112`. The default password is `deluge`
 
 After you log in the first place we need to go is `Preferences > Downloads`. We need to change the default download location to the one we specified in the `.env` file if you followed me its `/data/torrents`
 
@@ -370,9 +370,9 @@ Next lets go to the Plugins Section, sonarr and radarr use labels to help keep t
 Thats all the configuration we need to do in deluge so lets move on to the next step
 
 ## Prowlarr
-To access prowlarr you use the same IP address as before but with port 9696. Your url will look like this `http://<ServerIP>:9696`. 
+To access prowlarr you use the same IP address as before but with port 9696. Your URL will look like this `http://<ServerIP>:9696`. 
 
-Make sure you're on the Indexers Tab on the left side of the screen. Now go through and add your favorite trackers, I've had luck with 1337x, Rarbg, and YTS to name a few.
+Make sure you're on the `Indexers` tab on the left side of the screen. Now go through and add your favorite trackers, I've had luck with 1337x, Rarbg, and YTS to name a few.
 
 Keep this window handy as you'll need it for the next steps. 
 
@@ -381,7 +381,7 @@ Now lets access sonarr in our browser I think your starting to understand how to
 
 After you open sonarr navigate to `Settings > Media Management` then click `Add Root Folder`. Now you will want to select your tv folder mine is `/data/media/tv` and click `Ok`
 
-Now click `Download Clients` on the left panel, then click the big plus to add a download client. Select whatever client you chose if youre following my example its deluge. Give it a friendly name and make sure the `Host` is set to localhost and `Port` is set to 8112, then enter your password. I also like to shorten the category from tv-sonarr to sonarr, then click the `Test` button at the bottom of the window. If it succeeds click the `Save` button otherwise double check the password.
+Now click `Download Clients` on the left panel, then click the big plus to add a download client. Select whatever client you chose if youre following my example its deluge. Give it a friendly name and make sure the `Host` is set to localhost and `Port` is set to 8112, then enter your password. I also like to shorten the category from tv-sonarr to tv, then click the `Test` button at the bottom of the window. If it succeeds click the `Save` button otherwise double check the password.
 
 <center><img src=/assets/arrs_behind_vpn/sonarr_-_download_client.png></center>
 
@@ -396,7 +396,7 @@ Now if you go back to sonarr you shouldn't see any warnings. Go to `Series > Add
 If youre having issues setting a root folder make sure your user has permissions to write in that directory. 
 
 ## Radarr
-Okay I can't keep typing so here's the port 7878
+Okay I can't keep typing so here's the port `7878`
 
 Alright first lets add a root folder, go to `Settings > Media Management` and click the big blue button. Select your folder in my case its `/data/media/movies` and click `Ok`.
 
