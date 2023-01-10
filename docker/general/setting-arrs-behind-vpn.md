@@ -2,7 +2,7 @@
 title: Setting the *arrs behind a VPN
 description: This guide will cover setting up Sonarr, Radarr, and various others behind a VPN
 published: false
-date: 2022-11-18T02:14:39.910Z
+date: 2023-01-10T23:01:56.129Z
 tags: docker, general
 editor: markdown
 dateCreated: 2022-06-05T00:42:25.363Z
@@ -13,13 +13,13 @@ dateCreated: 2022-06-05T00:42:25.363Z
 Setting Sonarr, Radarr and the like behind a VPN
 
 # Overview
-This guide will cover setting up services like sonarr, radarr, and prowlarr, and whatever torrent client you prefer behind a VPN. The benefits of doing so is hiding your internet activity from your ISP. While I will set up Sonarr and Radarr behind a VPN in this guide the developers recommend to not do so as it may break some functionalities; [read more here](https://wiki.servarr.com/en/sonarr/faq#vpns-jackett-and-the-arrs). 
+This guide will cover setting up services like sonarr, radarr, and prowlarr, and whatever torrent client you prefer behind a VPN. The benefits of doing so is hiding your internet activity from your ISP. While I will set up sonarr and radarr behind a VPN in this guide the developers recommend to not do so as it may break some functionalities; [read more here](https://wiki.servarr.com/en/sonarr/faq#vpns-jackett-and-the-arrs). 
 
 # The Setup
 This guide will assume a few things about your environment however I provided an environment file to make it easier to adapt to different configurations.
 
 ## Prerequisites
-There's tons of guides on this and its out of the scope of this guide so if you don't already have these packages installed please go do so now. 
+There are tons of guides on this and it's out of the scope of this guide so if you don't already have these packages installed, please go do so now. 
 - Docker
 - Docker-Compose
 
@@ -39,21 +39,21 @@ The basic idea of this is the folder structure needs to remain generally the sam
 ```
 
 ## Preparing Your System
-So your first step is to create the `docker-compose.yml` file if you're following my example you can use the below command to create the compose file in a `media_stack` folder in the `/opt` directory
+So, your first step is to create the `docker-compose.yml` file if you're following my example, you can use the below command to create the compose file in a `media_stack` folder in the `/opt` directory
 
 ```bash
 sudo mkdir /opt/media_stack
 ```
-Now lets change the permission of the media_stack file so our user can edit it. This will set the permission so anyone can read the folder but only the user and group can edit and execute in the directory. Replace `<USER>` with your username.
+Now let's change the permission of the media_stack file so our user can edit it. This will set the permission so anyone can read the folder but only the user and group can edit and execute in the directory. Replace `<USER>` with your username.
 ```bash
 sudo chown <USER>:<USER> /opt/media_stack
 sudo chmod 774 /opt/media_stack
 ```
-Now lets create the `docker-compose.yml` file
+Now let's create the `docker-compose.yml` file
 ```bash
 touch /opt/media_stack/docker-compose.yml
 ```
-Next lets make the environment variable file
+Next let's make the environment variable file
 ```bash
 touch /opt/media_stack/.env
 ```
@@ -63,7 +63,7 @@ sudo chmod 660 /opt/media_stack/.env
 ```
 
 # The Compose File
-Below is an example compose file for setting up Sonarr, Radarr, Prowlarr, and Deluge behind another container called Gluetun that hosts our VPN. Don't worry too much about how intimidating the stack looks as we begin to break it down you'll see that its not as complicated as it looks at first.
+Below is an example compose file for setting up Sonarr, Radarr, Prowlarr, and Deluge behind another container called Gluetun that hosts our VPN. Don't worry too much about how intimidating the stack looks as we begin to break it down you'll see that it's not as complicated as it looks at first.
 
 
 Now you just have to copy this file make any necessary edits and paste it in the file. More on the edits needed in the [break down section](#breaking-it-down).
@@ -85,7 +85,6 @@ services:
       - ${PROWLARR_PORT}:9696 # Prowlarr
       - ${SONARR_PORT}:8989 # Sonarr
       - ${RADARR_PORT}:7878 # Radarr
-      - ${BAZARR_PORT}:6767 # Bazarr
     environment:
       - OPENVPN_USER=${GLUETUN_OPENVPN_USER}
       - OPENVPN_PASSWORD=${GLUETUN_OPENVPN_PASSWORD}
@@ -153,21 +152,6 @@ services:
       - ${MEDIA_FOLDER}:/data
     network_mode: service:gluetun
     restart: unless-stopped
-
-  bazarr:
-    image: linuxserver/bazarr:latest
-    container_name: bazarr
-    depends_on:
-      - gluetun
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    volumes:
-      - ${CONFIG_FOLDER}/bazarr:/config
-      - ${MEDIA_FOLDER}:/data
-    network_mode: service:gluetun
-    restart: unless-stopped
 ```
 This is an environment file we use these to specify certain variables we need to run the containers. The benefits of using them is the ease of editing the stack in the future. I love using them because it makes it super easy to change environments and make any changes needed in a much faster manner. You may need to add parameters for gluetun depending on your VPN client. 
 
@@ -186,7 +170,6 @@ DELUGE_PORT=8112
 PROWLARR_PORT=9696
 SONARR_PORT=8989
 RADARR_PORT=7878
-BAZARR_PORT=6767
 
 # Gluetun Parameters
 
@@ -199,9 +182,9 @@ GLUETUN_OPENVPN_PASSWORD=
 In this section we will breakdown each container and cover what they do.
 
 ### Gluetun
-This is perhaps the most important container in the entire stack as this will be the VPN for your containers. This section will require special configuration for each use case. It supports a variety of different VPN providers but some may require different environment variables. Be sure to check their [documentaion](https://github.com/qdm12/gluetun/wiki) to ensure its setup correctly. The example used below is for Nord VPN.
+This is perhaps the most important container in the entire stack as this will be the VPN for your containers. This section will require special configuration for each use case. It supports a variety of different VPN providers, but some may require different environment variables. Be sure to check their [documentation](https://github.com/qdm12/gluetun/wiki) to ensure its setup correctly. The example used below is for Nord VPN.
 
-Most of the information in this section of the file we can just gloss over. Such as the section below this just specifies the image conatainer name and gives it the permissions it needs i.e. `NET_ADMIN`
+Most of the information in this section of the file we can just gloss over. Such as the section below this just specifies the image container name and gives it the permissions it needs i.e. `NET_ADMIN`.
 
 ```yaml
     image: qmcgaw/gluetun:latest
@@ -209,7 +192,7 @@ Most of the information in this section of the file we can just gloss over. Such
     cap_add:
       - NET_ADMIN
 ```
-The below section specifies all of the ports we use for our services. You'll see some are set as port numbers and others are set using envrionment variables. Those variables are pulled from the envrionment file we specified above. You may need to change them if they conflict with anything you already have running but for most use cases you shouldn't need to change them. We need to specify all of our services through here since gluetun will be acting as our gateway to the internet. With that said if you would like to use docker DNS to load any of these services with their names you won't be able to do it with a simple `sonarr` for Sonarr instead you would use `gluetun:8989`. This is because all of our traffic first goes through the gluetun container before reaching any of your devices and thus it gets seen as gluetun traffic. 
+The below section specifies all of the ports we use for our services. You'll see some are set as port numbers and others are set using environment variables. Those variables are pulled from the environment file we specified above. You may need to change them if they conflict with anything you already have running but for most use cases you shouldn't need to change them. We need to specify all of our services through here since gluetun will be acting as our gateway to the internet. With that said if you would like to use docker DNS to load any of these services with their names you won't be able to do it with a simple `sonarr` for Sonarr instead you would use `gluetun:8989`. This is because all of our traffic first goes through the gluetun container before reaching any of your devices and thus it gets seen as gluetun traffic. 
 
 ```yaml
     ports:
@@ -224,7 +207,7 @@ The below section specifies all of the ports we use for our services. You'll see
       - ${BAZARR_PORT}:6767 # Bazarr
 ```
 
-This is the meat and potatoes of this container. These are the variables you need to change to be able to connect to your VPN client. These variables are specified through the `.env` file. You may need to edit this section of the compose file to fit your needs. But if you're using NordVPN as your client then go get the credentails you need by logging into your [Nord Account](https://nordaccount.com/login). I'm not gonna delve much more into obtaining those credentials because its out of scope for this guide. Once you locate them just copy those over and your all set with this part.
+This is the meat and potatoes of this container. These are the variables you need to change to be able to connect to your VPN client. These variables are specified through the `.env` file. You may need to edit this section of the compose file to fit your needs. But if you're using NordVPN as your client then go get the credentials you need by logging into your [Nord Account](https://nordaccount.com/login). I'm not going to delve much more into obtaining those credentials because it's out of scope for this guide. Once you locate them just copy those over and your all set with this part.
 
 ```yaml
     environment:
@@ -249,7 +232,7 @@ This part of the file specifies the image used and the name for the container
     depends_on:
       - gluetun
 ```
-Next we specify the environment variables for the container. These variables are pulled from the `.env` file. The PUID and GUID are used to set permissions. These should be set to your user which is typically `1000` for both but run `id` in your terminal to verify those values. Note if your using a user other than the default one created on most linux systems then these will be different. Lastly we set the deluge log level to error, for debugging you may want to change that.  
+Next, we specify the environment variables for the container. These variables are pulled from the `.env` file. The PUID and GUID are used to set permissions. These should be set to your user which is typically `1000` for both, but run `id` in your terminal to verify those values. Note if you're using a user other than the default one created on most Linux systems then these will be different. Lastly, we set the deluge log level to error, for debugging you may want to change that.  
 ```yaml
     environment:
       - PUID=${PUID}
@@ -322,24 +305,7 @@ Radarr is in charge of downloading movies for your media stack. There's nothing 
     network_mode: service:gluetun
     restart: unless-stopped
 ```
-### Bazarr
-Lastly Bazarr is in charge of getting subtitles for your content. This container really isn't necessary unless you want to get subtitles for everything. 
-```yaml
-  bazarr:
-    image: linuxserver/bazarr:latest
-    container_name: bazarr
-    depends_on:
-      - gluetun
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    volumes:
-      - ${CONFIG_FOLDER}/bazarr:/config
-      - ${MEDIA_FOLDER}:/data
-    network_mode: service:gluetun
-    restart: unless-stopped
-```
+
 
 # Running the Stack
 Running the stack should be simple just pull the container with
@@ -406,10 +372,7 @@ Now lets add a download client look on the left pane and select `Download Client
 
 Alright lets go copy the API key now use the left pane to go to `General` and copy the `API Key`, now lets pop back over to prowlarr. 
 
-From the Apps menu in settings add an app. Select Radarr and 
+Once in prowlarr, go to the Apps menu in settings, then click the plus sign to add an app. Select Radarr, then for the prowlarr server enter `http://localhost:9696` and for the radarr server enter `http://localhost:7878` and paste in the API key from the step above. Next, click `Test` and if it succeeds click `Save` if not double check the values entered.
 
-
-
-
-
-Oh by the way, I'm sorry if this is riddled with tons of typos and gramatical issues its 2am. 
+# Conclusion
+Alright, I think thats about it, you should now have a fully setup and fully working media stack. If not feel free to reach out for help and I will do my best to assist. The easiest way to contact me is via my contact page on my website. [https://parksauce.io/contact/](https://parksauce.io/contact/)
