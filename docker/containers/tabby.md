@@ -2,13 +2,11 @@
 title: Tabby
 description: Guide to Tabby in Docker
 published: true
-date: 2023-01-10T22:38:31.866Z
+date: 2023-01-10T22:39:05.652Z
 tags: containers
 editor: markdown
 dateCreated: 2022-06-02T12:50:24.795Z
 ---
-
-# Documentation Also Available at [Park Sauce Docs](https://docs.parksauce.io)
 
 # Goals
 - Rebase the image from ubuntu to alpine to support more architectures
