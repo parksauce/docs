@@ -2,11 +2,13 @@
 title: Tabby
 description: Guide to Tabby in Docker
 published: true
-date: 2022-05-25T19:11:08.615Z
+date: 2023-01-10T22:38:31.866Z
 tags: containers
 editor: markdown
-dateCreated: 2022-05-05T06:05:38.239Z
+dateCreated: 2022-06-02T12:50:24.795Z
 ---
+
+# Documentation Also Available at [Park Sauce Docs](https://docs.parksauce.io)
 
 # Goals
 - Rebase the image from ubuntu to alpine to support more architectures
@@ -14,7 +16,7 @@ dateCreated: 2022-05-05T06:05:38.239Z
 - Add PUID and PGID environment variables
 
 # Known Issues
-- Emails not sending
+- Emails not sending - this is because Tabby currently uses sendmail to send emails, however, from my research sendmail isn't robust enough to allow authentication to external email server's. Moreover, implementing an email server into this container is simply out of the scope for this project. I am looking around to see if there is anything that can accept sendmail requests and proxy those to an external email server. I am by no means a software developer and my specialties focus more on running and managing containers rather than anything software related. If anyone would like to help out with this project or has any suggestions I am all ears.
 
 # Requirements
 - Docker
@@ -51,7 +53,7 @@ docker run -d \
   --network=tabby-backend \
   -p 8010:80 \
   --restart unless-stopped \
-  thealpaka/tabby
+  parksauce/tabby
 ```
 Then run this command to start the database
 ```bash
@@ -79,7 +81,7 @@ version: '3'
 services:
 
   tabby:
-    image: thealpaka/tabby
+    image: parksauce/tabby
     container_name: tabby
     ports:
       - 8010:80
