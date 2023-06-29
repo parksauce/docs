@@ -2,8 +2,8 @@
 title: Tabby
 description: Guide to Tabby in Docker
 published: true
-date: 2023-01-10T22:39:05.652Z
-tags: containers
+date: 2023-06-29T21:46:26.000Z
+tags: containers, docker
 editor: markdown
 dateCreated: 2022-06-02T12:50:24.795Z
 ---
