@@ -1,8 +1,8 @@
 ---
 title: Actual Helpers
-description: 
+description: Deploying actual-helpers
 published: true
-date: 2024-10-08T00:48:47.278Z
+date: 2024-10-08T01:00:10.860Z
 tags: containers, docker
 editor: markdown
 dateCreated: 2024-10-04T20:21:05.265Z
@@ -13,14 +13,11 @@ dateCreated: 2024-10-04T20:21:05.265Z
 All credit for the project go to the developers over at [psybers/actual-helpers](https://github.com/psybers/actual-helpers). I simply package the scripts into an easy to deploy and customize container.
 
 ## Table of Contents
-- [Deployment](#deployment)
-    - [Quick Start](#quick-start)
-    - [Environment Variables](#environment-variables)
-    - [Docker Compose](#docker-compose) 
+  - [Quick Start](#quick-start)
+  - [Environment Variables](#environment-variables)
+  - [Docker Compose](#docker-compose) 
 
-## Deployment
-
-### Quick Start 
+## Quick Start 
 Deploying the container is a fairly simple process, there are three required variables and this can vary depending on the scripts you'd like to use those are `ACTUAL_SERVER_URL`, `ACTUAL_SERVER_PASSWORD`, and `ACTUAL_SYNC_ID`, see the [environment variables](#environment-variables) section for more information. By default this container is configured to run the `sync-banks.js` script. If you'd like to change this set the `SCRIPT` varaible to the name of the script you'd like to run. 
 
 To run the container you can use the following `docker run` command.
@@ -30,7 +27,7 @@ docker run --name=actual-helpers -e ACTUAL_SERVER_URL="https://budget.example.co
 
 The container will run to completion and stop, to keep it lightweight it doesn't have a cron mechanism built into it. If you'd like to run it on a schedule then you'll have to configure a CronJob to run the command on a schedule there's plenty of guides out there on this already so I won't delve into this.
 
-### Environment Variables
+## Environment Variables
 |  Variable | Description | Default | Optional |
 |:---------:|:-----------:|:-------:|:--------:|
 | `SCRIPT` | Sets the script to run in the container | `sync-banks.js` | &#x2713; |
@@ -49,7 +46,7 @@ The container will run to completion and stop, to keep it lightweight it doesn't
 | `BITCOIN_PRICE_JSON_PATH` | JSON path for retrieving Bitcoin price |  | &#x2713; |
 | `BITCOIN_PAYEE_NAME` | Name of the payee for Bitcoin price changes |  | &#x2713; |
 
-### Docker Compose
+## Docker Compose
 Theres an example compose file available in the github, you can pull it to your local machine using the command below.
 ```shell
 wget https://raw.githubusercontent.com/realjoshparker/docker_actual-helpers/refs/heads/master/docker-compose.yaml
